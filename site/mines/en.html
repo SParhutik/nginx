@@ -22,12 +22,14 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            touch-action: manipulation; /* Отключает масштабирование на сенсорных устройствах */
-            overflow: hidden; /* Отключает прокрутку страницы */
-            user-select: none; /* Для современных браузеров */
-            -webkit-user-select: none; /* Для Safari */
-            -moz-user-select: none; /* Для Firefox */
-            -ms-user-select: none; /* Для Internet Explorer и Edge */
+            
+            /*touch-action: manipulation;  Отключает масштабирование на сенсорных устройствах */
+            /*overflow: hidden; /* Отключает прокрутку страницы */
+           /* user-select: none; /* Для современных браузеров */
+           /* -webkit-user-select: none; /* Для Safari */
+           /* -moz-user-select: none; /* Для Firefox */
+           /* -ms-user-select: none; /* Для Internet Explorer и Edge */
+            
         }
 
         .main-container {
@@ -334,22 +336,22 @@ function getSignal() {
     });
 
     // Возвращаем кнопку к исходному состоянию после завершения всех задержек
-    //setTimeout(() => {
+    setTimeout(() => {
         button.innerHTML = "GET<br>SIGNAL"; // Возвращаем исходный текст с HTML
         button.style.backgroundColor = ''; // Возвращаем исходный цвет
         button.disabled = false; // Включаем кнопку снова
-    //}, delay);
+    }, delay);
 }
     
     window.onload = function() {
         createSquares();
     }
 </script>
-<script>
+<!-- <script>
     // Запретить правый клик
     document.addEventListener('contextmenu', function(event) {
         event.preventDefault(); // Отменяет стандартное действие правого клика
     });
-</script>
+</script> -->
 </body>
 </html>
