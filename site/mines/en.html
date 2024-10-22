@@ -298,53 +298,59 @@
 
 
     // Функция, запускающая процесс открытия ячеек и воспроизведение звука
-    function getSignal() {
-            const squares = document.querySelectorAll('.square'); // Предполагается, что у вас есть элементы с классом square
-            const button = document.getElementById('start'); // Селектор кнопки
+    // Создаем аудио элемент вне функции
+const audio = new Audio('src/1.mp3');
+audio.load(); // Предварительная загрузка
 
-            // Проверяем, не выполняется ли уже процесс
-            if (button.disabled) {
-                return; // Прерываем выполнение, если процесс уже идет
-            }
+function getSignal() {
+    const squares = document.querySelectorAll('.square'); // Предполагается, что у вас есть элементы с классом square
+    const button = document.getElementById('start'); // Селектор кнопки
 
-            button.textContent = "WE DO MAGIC...";
-            button.style.backgroundColor = '#555';
-            button.disabled = true; // Отключаем кнопку
+    // Проверяем, не выполняется ли уже процесс
+    if (button.disabled) {
+        return; // Прерываем выполнение, если процесс уже идет
+    }
 
-            squares.forEach(square => {
-                square.style.backgroundColor = '#238fa9';
-                square.innerHTML = '';
+    button.textContent = "WE DO MAGIC...";
+    button.style.backgroundColor = '#555';
+    button.disabled = true; // Отключаем кнопку
+
+    squares.forEach(square => {
+        square.style.backgroundColor = '#238fa9';
+        square.innerHTML = '';
+    });
+
+    let indices = new Set();
+    const cellsToOpen = squaresToOpen(); // Получаем количество ячеек для открытия
+
+    while (indices.size < cellsToOpen) {
+        indices.add(Math.floor(Math.random() * squares.length));
+    }
+
+    let delay = 0;
+
+    indices.forEach(index => {
+        setTimeout(() => {
+            // Воспроизводим звук
+            const audioClone = new Audio('src/1.mp3'); // Создаем новый экземпляр аудио для каждого открытия
+            audioClone.play().catch(err => {
+                console.error("Ошибка воспроизведения звука:", err);
             });
 
-            let indices = new Set();
-            const cellsToOpen = squaresToOpen(); // Получаем количество ячеек для открытия
+            const square = squares[index];
+            square.style.backgroundColor = '#0a101e';
+            square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'src/star.svg\') center/contain no-repeat;"></div>';
+        }, delay);
+        delay += 1000; // Задержка 1 секунда
+    });
 
-            while (indices.size < cellsToOpen) {
-                indices.add(Math.floor(Math.random() * squares.length));
-            }
-
-            let delay = 0;
-
-            indices.forEach(index => {
-                setTimeout(() => {
-                    // const audio = new Audio('src/1.mp3');
-                    audio.play();
-                    const square = squares[index];
-                    square.style.backgroundColor = '#0a101e';
-                    square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'src/star.svg\') center/contain no-repeat;"></div>';
-                }, delay);
-                delay += 1000; // Задержка 1 секунда
-            });
-
-            // Возвращаем кнопку к исходному состоянию после завершения всех задержек
-            setTimeout(() => {
-                button.innerHTML = "GET<br>SIGNAL"; // Возвращаем исходный текст с HTML
-                button.style.backgroundColor = ''; // Возвращаем исходный цвет
-                button.disabled = false; // Включаем кнопку снова
-            }, delay);
-        }
-    const audio = new Audio('src/1.mp3');
-    audio.load(); // Предварительная загрузка
+    // Возвращаем кнопку к исходному состоянию после завершения всех задержек
+    setTimeout(() => {
+        button.innerHTML = "GET<br>SIGNAL"; // Возвращаем исходный текст с HTML
+        button.style.backgroundColor = ''; // Возвращаем исходный цвет
+        button.disabled = false; // Включаем кнопку снова
+    }, delay);
+}
     
     window.onload = function() {
         createSquares();
