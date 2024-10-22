@@ -303,6 +303,8 @@
     // Создаем аудио элемент вне функции
 
     function getSignal() {
+        const audio = new Audio('src/1.mp3');
+        audio.play();
         const squares = document.querySelectorAll('.square');
         squares.forEach(square => {
             square.style.backgroundColor = '#238fa9';
@@ -319,13 +321,13 @@
         let delay = 0;
         indices.forEach(index => {
             setTimeout(() => {
-                const audio = new Audio('src/1.mp3');
-                audio.play();
+                const audio1 = new Audio('src/1.mp3');
+                audio1.play();
                 const square = squares[index];
                 square.style.backgroundColor = '#0a101e';
                 square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'src/star.svg\') center/contain no-repeat;"></div>';
             }, delay);
-            delay += 900; // Задержка 1 секунда
+            delay += 1000; // Задержка 1 секунда
         });
     }
     
