@@ -5,7 +5,7 @@ function getRan(min, max) {
 }
 
 async function checkSignal() {
-    let randomNumber1 = getRan(1.1, 1.3).toFixed(2);
+    let randomNumber1 = getRan(1.1, 1.5).toFixed(2);
     const url = 'https://lucky-jet-history.gamedev-atech.cc/public/history/api/history/replay';
     const response = await fetch(url);
     const data = await response.json();
@@ -39,7 +39,7 @@ async function checkSignal() {
         container.appendChild(img);
 
         const text = document.createElement('div');
-        text.innerText = 'ОЖИДАНИЕ\nСЛЕДУЮЩЕГО РАУНДА';
+        text.innerText = 'WAITING FOR\nNEW GAME ROUND';
         text.id = 'waitingText';
         container.appendChild(text);
         
@@ -67,7 +67,7 @@ async function checkSignal() {
     } else if (state === "ending") {
         responseText.textContent = "Waiting..";
         responseText.className = 'text fly';
-        responseText2.textContent = "УЛЕТЕЛ";
+        responseText2.textContent = "Finished";
         responseText2.className = 'text2 fly2';
         if (loadImg) {
             loadImg.style.display = 'none';
