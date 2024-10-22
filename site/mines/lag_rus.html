@@ -14,6 +14,7 @@
 
         body {
             background-image: url('src/fon.jpg');
+            
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -22,14 +23,12 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            
-            /*touch-action: manipulation;  Отключает масштабирование на сенсорных устройствах */
-            /*overflow: hidden; /* Отключает прокрутку страницы */
-           /* user-select: none; /* Для современных браузеров */
-           /* -webkit-user-select: none; /* Для Safari */
-           /* -moz-user-select: none; /* Для Firefox */
-           /* -ms-user-select: none; /* Для Internet Explorer и Edge */
-            
+            touch-action: manipulation; /* Отключает масштабирование на сенсорных устройствах */
+            overflow: hidden; /* Отключает прокрутку страницы */
+            user-select: none; /* Для современных браузеров */
+            -webkit-user-select: none; /* Для Safari */
+            -moz-user-select: none; /* Для Firefox */
+            -ms-user-select: none; /* Для Internet Explorer и Edge */
         }
 
         .main-container {
@@ -131,9 +130,9 @@
             display: inline-block;
             animation: bounce 0.3s ease infinite alternate;
             font-size: 53px; /* Smaller font size */
-            color: rgb(209, 178, 5);
-            text-shadow: 0 0.25px 0 #ccc, 0 0.5px 0 #ccc, 0 0.75px 0 #ccc, 0 1px 0 #ccc,
-                        0 1.25px 0 #ccc, 0 1.5px 0 transparent, 0 1.75px 0 transparent, 0 2px 0 transparent,
+            color: rgb(240, 235, 81);
+            text-shadow: 0 0.50px 0 #000000, 0 0.5px 0 #000000, 0 0.75px 0 #000000, 0 1px 0 #000000,
+                        0 1.25px 0 #000000, 0 1.5px 0 transparent, 0 1.75px 0 transparent, 0 2px 0 transparent,
                         0 2.25px 0 transparent, 0 2.5px 2.5px rgba(0, 0, 0, 0.2);
         }
 
@@ -181,13 +180,13 @@
                 <!-- Квадраты будут добавлены здесь с помощью JavaScript -->
             </div>
         </div>
-        <div id="trap-count-label">NUMBER OF TRAPS</div>
+        <div id="trap-count-label">КОЛ-ВО ЛОВУШЕК</div>
         <div id="counter-container">
             <img class="control-button icon" src="src/minus.png" onclick="decrement()" alt="Minus">
             <span id="count" class="count-display">3</span>
             <img class="control-button icon" src="src/plus.png" onclick="increment()" alt="Plus">
         </div>
-        <button id="start" onclick="getSignal()">GET<br>SIGNAL</button>
+        <button id="start" onclick="getSignal()">Получить<br>сигнал</button>
     </div>
     <audio id="sound-effect" src="src/1.mp3"></audio> <!-- Звуковой эффект для воспроизведения -->
    <script>
@@ -289,67 +288,67 @@
     //     requestAnimationFrame(animateParticles)
     // }
 
-    // window.addEventListener('resize', () => {
-    //     canvas.width = window.innerWidth
-    //     canvas.height = window.innerHeight
-    // })
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+    })
 
-    //initParticles()
-    //animateParticles()
+    // initParticles()
+    // animateParticles()
 
 
 
     // Функция, запускающая процесс открытия ячеек и воспроизведение звука
     function getSignal() {
-    const squares = document.querySelectorAll('.square'); // Предполагается, что у вас есть элементы с классом square
-    const button = document.getElementById('start'); // Селектор кнопки
+            const squares = document.querySelectorAll('.square'); // Предполагается, что у вас есть элементы с классом square
+            const button = document.getElementById('start'); // Селектор кнопки
 
-    button.textContent = "WE DO MAGIC...";
-    button.style.backgroundColor = '#555';
-    button.disabled = true; // Отключаем кнопку
+            button.textContent = "Выполняется...";
+            button.style.backgroundColor = '#555';
+            button.disabled = true; // Отключаем кнопку
 
-    squares.forEach(square => {
-        square.style.backgroundColor = '#238fa9';
-        square.innerHTML = '';
-    });
+            squares.forEach(square => {
+                square.style.backgroundColor = '#238fa9';
+                square.innerHTML = '';
+            });
 
-    let indices = new Set();
-    const cellsToOpen = squaresToOpen(); // Получаем количество ячеек для открытия
+            let indices = new Set();
+            const cellsToOpen = squaresToOpen(); // Получаем количество ячеек для открытия
 
-    while (indices.size < cellsToOpen) {
-        indices.add(Math.floor(Math.random() * squares.length));
-    }
+            while (indices.size < cellsToOpen) {
+                indices.add(Math.floor(Math.random() * squares.length));
+            }
 
-    let delay = 0;
+            let delay = 0;
 
-    indices.forEach(index => {
-        setTimeout(() => {
-            const audio = new Audio('src/1.mp3'); // Создаем новый экземпляр аудио для каждого открытия
-            audio.play();
-            const square = squares[index];
-            square.style.backgroundColor = '#0a101e';
-            square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'src/star.svg\') center/contain no-repeat;"></div>';
-        }, delay);
-        delay += 1000; // Задержка 1 секунда
-    });
+            indices.forEach(index => {
+                setTimeout(() => {
+                    const audio = new Audio('src/1.mp3');
+                    audio.play();
+                    const square = squares[index];
+                    square.style.backgroundColor = '#0a101e';
+                    square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'src/star.svg\') center/contain no-repeat;"></div>';
+                }, delay);
+                delay += 1000; // Задержка 1 секунда
+            });
 
-    // Возвращаем кнопку к исходному состоянию после завершения всех задержек
-    setTimeout(() => {
-        button.innerHTML = "GET<br>SIGNAL"; // Возвращаем исходный текст с HTML
-        button.style.backgroundColor = ''; // Возвращаем исходный цвет
-        button.disabled = false; // Включаем кнопку снова
-    }, delay);
-}
-    
+            // Возвращаем кнопку к исходному состоянию после завершения всех задержек
+            setTimeout(() => {
+                button.innerHTML = "Получить<br>сигнал"; // Возвращаем исходный текст с HTML
+                button.style.backgroundColor = ''; // Возвращаем исходный цвет
+                button.disabled = false; // Включаем кнопку снова
+            }, delay);
+        }
+
     window.onload = function() {
         createSquares();
     }
 </script>
-<!-- <script>
+<script>
     // Запретить правый клик
     document.addEventListener('contextmenu', function(event) {
         event.preventDefault(); // Отменяет стандартное действие правого клика
     });
-</script> -->
+</script>
 </body>
 </html>
