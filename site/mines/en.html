@@ -305,9 +305,9 @@ function getSignal() {
     const button = document.getElementById('start'); // Селектор кнопки
 
     // Проверяем, не выполняется ли уже процесс
-    if (button.disabled) {
-        return; // Прерываем выполнение, если процесс уже идет
-    }
+    // if (button.disabled) {
+    //     return; // Прерываем выполнение, если процесс уже идет
+    // }
 
     button.textContent = "WE DO MAGIC...";
     button.style.backgroundColor = '#555';
