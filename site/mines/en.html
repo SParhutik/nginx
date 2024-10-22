@@ -327,7 +327,7 @@
 
             indices.forEach(index => {
                 setTimeout(() => {
-                    const audio = new Audio('src/1.mp3');
+                    // const audio = new Audio('src/1.mp3');
                     audio.play();
                     const square = squares[index];
                     square.style.backgroundColor = '#0a101e';
@@ -343,7 +343,9 @@
                 button.disabled = false; // Включаем кнопку снова
             }, delay);
         }
-
+    const audio = new Audio('src/1.mp3');
+    audio.load(); // Предварительная загрузка
+    
     window.onload = function() {
         createSquares();
     }
