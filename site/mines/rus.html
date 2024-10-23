@@ -173,7 +173,7 @@
         </div>
         <button onclick="getSignal()">Получить<br>сигнал</button>
     </div>
-    <audio id="sound-effect" src="1.mp3"></audio> <!-- Звуковой эффект для воспроизведения -->
+    <audio id="sound-effect" src="2.mp3"></audio> <!-- Звуковой эффект для воспроизведения -->
    <script>
     let count = 3; // Начальное количество ловушек
     const countElement = document.getElementById('count');
@@ -243,7 +243,7 @@
         let delay = 0;
         indices.forEach(index => {
             setTimeout(() => {
-                const audio = new Audio('1.mp3');
+                const audio = new Audio('2.mp3');
                 audio.play();
                 const square = squares[index];
                 square.style.backgroundColor = '#0a101e';
