@@ -225,6 +225,45 @@
     }
 
 
+    const audio1 = new Audio('1.mp3');
+    const audio2 = new Audio('1.mp3');
+
+    let isPlayingAudio1 = true;
+    let needSound = true;
+
+    async function playAlternatingSounds() {
+        while (needSound) { // Цикл продолжается, пока нужно воспроизводить звук
+            if (isPlayingAudio1) {
+                audio1.currentTime = 0; // Перематываем в начало
+                await audio1.play(); // Ждем, пока audio1 начнет воспроизводиться
+            
+                // Ждем окончания воспроизведения audio1
+                await new Promise(resolve => {
+                    audio1.onended = () => {
+                        isPlayingAudio1 = false;
+                        resolve(); // Продолжаем после окончания audio1
+                    };
+                });
+            } else {
+                audio2.currentTime = 0; // Перематываем в начало
+                await audio2.play(); // Ждем, пока audio2 начнет воспроизводиться
+                
+                // Ждем окончания воспроизведения audio2
+                await new Promise(resolve => {
+                    audio2.onended = () => {
+                        isPlayingAudio1 = true;
+                        resolve(); // Продолжаем после окончания audio2
+                    };
+                });
+            }
+        }
+    }
+   
+
+    
+
+
+
     function getSignal() {
         const squares = document.querySelectorAll('.square');
         squares.forEach(square => {
@@ -239,20 +278,28 @@
             indices.add(Math.floor(Math.random() * squares.length));
         }
 
-        let delay = 500;
+        let delay = 0;
         indices.forEach(index => {
             setTimeout(() => {
-                const audio = new Audio('1.mp3');
+                needSound = true
+                playAlternatingSounds(); 
+  
+                 // Запуск чередования звуков
                 // Воспроизводим загруженный звук
                 //audio.currentTime = 0; // Возвращаем аудио к началу, если нужно повторное воспроизведение
-                audio.play();
                 
                 const square = squares[index];
                 square.style.backgroundColor = '#0a101e';
                 square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'star.svg\') center/contain no-repeat;"></div>';
             }, delay);
             delay += 1000; // Задержка 1 секунда
+
+            setTimeout(() => {
+                needSound = false;
+            }, delay);
+            
         });
+        
     }
 
     window.onload = function() {
