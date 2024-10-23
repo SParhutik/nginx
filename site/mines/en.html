@@ -224,69 +224,37 @@
         }
     }
 
-    let audioContext;
-let gainNode;
-let buffer;
+    const audio = new Audio('1.mp3');
+    audio.load();
 
-// Функция для загрузки и декодирования аудиофайла
-async function loadAudio() {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    gainNode = audioContext.createGain();
-    gainNode.connect(audioContext.destination);
+    function getSignal() {
+        const squares = document.querySelectorAll('.square');
+        squares.forEach(square => {
+            square.style.backgroundColor = '#238fa9';
+            square.innerHTML = '';
+        });
 
-    const response = await fetch('1.mp3'); // Загрузим аудиофайл
-    const arrayBuffer = await response.arrayBuffer();
-    buffer = await audioContext.decodeAudioData(arrayBuffer);
-}
+        let indices = new Set();
+        const cellsToOpen = squaresToOpen(); // Получаем количество ячеек для открытия
 
-// Функция для воспроизведения звука с плавным нарастанием и затуханием
-function playSound() {
-    const source = audioContext.createBufferSource();
-    source.buffer = buffer;
-    source.connect(gainNode);
+        while (indices.size < cellsToOpen) {
+            indices.add(Math.floor(Math.random() * squares.length));
+        }
 
-    // Плавное нарастание громкости в начале
-    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-    gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.5); // За 0.5 сек увеличиваем громкость
-
-    source.start();
-
-    // Плавное затухание громкости перед завершением аудио
-    source.onended = () => {
-        gainNode.gain.setValueAtTime(1, audioContext.currentTime); 
-        gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.5); // Плавное затухание за 0.5 сек
-    };
-}
-
-// Вызов загрузки аудио при загрузке страницы
-loadAudio();
-
-function getSignal() {
-    const squares = document.querySelectorAll('.square');
-    squares.forEach(square => {
-        square.style.backgroundColor = '#238fa9';
-        square.innerHTML = '';
-    });
-
-    let indices = new Set();
-    const cellsToOpen = squaresToOpen(); // Получаем количество ячеек для открытия
-
-    while (indices.size < cellsToOpen) {
-        indices.add(Math.floor(Math.random() * squares.length));
+        let delay = 150;
+        indices.forEach(index => {
+            setTimeout(() => {
+                // Воспроизводим загруженный звук
+                audio.currentTime = 0; // Возвращаем аудио к началу, если нужно повторное воспроизведение
+                audio.play();
+                
+                const square = squares[index];
+                square.style.backgroundColor = '#0a101e';
+                square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'star.svg\') center/contain no-repeat;"></div>';
+            }, delay);
+            delay += 1150; // Задержка 1 секунда
+        });
     }
-
-    let delay = 0;
-    indices.forEach(index => {
-        setTimeout(() => {
-            const square = squares[index];
-            square.style.backgroundColor = '#0a101e';
-            square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'star.svg\') center/contain no-repeat;"></div>';
-            
-            playSound(); // Воспроизведение звука с плавным переходом
-        }, delay);
-        delay += 1000; // Задержка 1 секунда
-    });
-}
 
     window.onload = function() {
         createSquares();
