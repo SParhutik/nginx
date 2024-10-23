@@ -225,8 +225,9 @@
     }
 
     // Функция, запускающая процесс открытия ячеек и воспроизведение звука
-    const audio = new Audio('1.mp3');
-    audio.load();
+    let audio1 = new Audio('1.mp3');
+    let audio2 = new Audio('1.mp3');
+    let isAudio1Playing = false; // Флаг для чередования звуков
 
     function getSignal() {
         const squares = document.querySelectorAll('.square');
@@ -242,18 +243,25 @@
             indices.add(Math.floor(Math.random() * squares.length));
         }
 
-        let delay = 50;
+        let delay = 0;
         indices.forEach(index => {
             setTimeout(() => {
-                // Воспроизводим загруженный звук
-                //audio.currentTime = 0; // Возвращаем аудио к началу, если нужно повторное воспроизведение
-                audio.play();
-                
                 const square = squares[index];
                 square.style.backgroundColor = '#0a101e';
                 square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'star.svg\') center/contain no-repeat;"></div>';
+
+                // Чередование звуков
+                if (isAudio1Playing) {
+                    audio2.currentTime = 0; // Перезапуск второго аудио
+                    audio2.play();
+                    isAudio1Playing = false;
+                } else {
+                    audio1.currentTime = 0; // Перезапуск первого аудио
+                    audio1.play();
+                    isAudio1Playing = true;
+                }
             }, delay);
-            delay += 1100; // Задержка 1 секунда
+            delay += 1000; // Задержка 1 секунда
         });
     }
 
