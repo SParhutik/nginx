@@ -225,41 +225,6 @@
     }
 
 
-    const audio1 = new Audio('1.mp3');
-    const audio2 = new Audio('1.mp3');
-
-    let isPlayingAudio1 = true;
-    let needSound = true;
-
-    async function playAlternatingSounds() {
-        while (needSound) { // Цикл продолжается, пока нужно воспроизводить звук
-            if (isPlayingAudio1) {
-                await audio1.play(); // Воспроизводим audio1
-                
-                // Ждем окончания воспроизведения audio1
-                await new Promise(resolve => {
-                    audio1.onended = () => {
-                        isPlayingAudio1 = false; // Переключаем на audio2
-                        resolve(); // Продолжаем после окончания audio1
-                    };
-                });
-            } else {
-                await audio2.play(); // Воспроизводим audio2
-                
-                // Ждем окончания воспроизведения audio2
-                await new Promise(resolve => {
-                    audio2.onended = () => {
-                        isPlayingAudio1 = true; // Переключаем на audio1
-                        resolve(); // Продолжаем после окончания audio2
-                    };
-                });
-            }
-        }
-    }
-   
-
-    
-
 
 
     function getSignal() {
@@ -279,9 +244,10 @@
         let delay = 0;
         indices.forEach(index => {
             setTimeout(() => {
-                needSound = true
-                playAlternatingSounds(); 
-  
+                const audio = new Audio('1.mp3');
+                audio.play()
+
+                
                  // Запуск чередования звуков
                 // Воспроизводим загруженный звук
                 //audio.currentTime = 0; // Возвращаем аудио к началу, если нужно повторное воспроизведение
@@ -291,11 +257,6 @@
                 square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'star.svg\') center/contain no-repeat;"></div>';
             }, delay);
             delay += 1000; // Задержка 1 секунда
-
-            setTimeout(() => {
-                needSound = false;
-            }, delay);
-            
         });
         
     }
