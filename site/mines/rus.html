@@ -325,7 +325,7 @@
             // Используем обертку для асинхронного вызова
             setTimeout(async () => {
                 const audio = new Audio('src/1.mp3'); // Создаем новый экземпляр аудио для каждого воспроизведения
-                audio.play().catch(error => console.error('Ошибка воспроизведения аудио:', error)); // Обработка ошибок воспроизведения
+                await audio.play()
 
                 const square = squares[index];
                 square.style.backgroundColor = '#0a101e';
