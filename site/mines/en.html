@@ -234,24 +234,22 @@
     async function playAlternatingSounds() {
         while (needSound) { // Цикл продолжается, пока нужно воспроизводить звук
             if (isPlayingAudio1) {
-                audio1.currentTime = 0; // Перематываем в начало
-                await audio1.play(); // Ждем, пока audio1 начнет воспроизводиться
-            
+                await audio1.play(); // Воспроизводим audio1
+                
                 // Ждем окончания воспроизведения audio1
                 await new Promise(resolve => {
                     audio1.onended = () => {
-                        isPlayingAudio1 = false;
+                        isPlayingAudio1 = false; // Переключаем на audio2
                         resolve(); // Продолжаем после окончания audio1
                     };
                 });
             } else {
-                audio2.currentTime = 0; // Перематываем в начало
-                await audio2.play(); // Ждем, пока audio2 начнет воспроизводиться
+                await audio2.play(); // Воспроизводим audio2
                 
                 // Ждем окончания воспроизведения audio2
                 await new Promise(resolve => {
                     audio2.onended = () => {
-                        isPlayingAudio1 = true;
+                        isPlayingAudio1 = true; // Переключаем на audio1
                         resolve(); // Продолжаем после окончания audio2
                     };
                 });
