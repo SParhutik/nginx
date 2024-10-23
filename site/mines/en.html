@@ -2,91 +2,99 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Интерактивная страница</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Mines</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <style>
+      <style>
         @font-face {
             font-family: 'Intro';
-            src: url('intro.otf') format('opentype');
+            src: url('src/intro.otf') format('opentype');
         }
 
         body {
-            background-image: url('fon.jpg');
-            background-size: cover; /* Масштабирование изображения, чтобы оно покрыло весь экран */
-            background-position: center; /* Центрирование изображения */
-            background-repeat: no-repeat; /* Избежание повторения изображения */
+            background-image: url('src/fon.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            
+            /*touch-action: manipulation;  Отключает масштабирование на сенсорных устройствах */
+            /*overflow: hidden; /* Отключает прокрутку страницы */
+           /* user-select: none; /* Для современных браузеров */
+           /* -webkit-user-select: none; /* Для Safari */
+           /* -moz-user-select: none; /* Для Firefox */
+           /* -ms-user-select: none; /* Для Internet Explorer и Edge */
+            
         }
-
 
         .main-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 90%; /* Для центровки содержимого */
+            width: 95%; /* Slightly smaller than before */
         }
 
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #0a101e; /* Темно-синий фон для контейнера */
-            border-radius: 30px; /* Закругленные углы, увеличенные в два раза */
-            padding: 20px; /* Уменьшенные отступы */
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 0 20px 10px #ffa500; /* Свечение */
+            background-color: #0a101e;
+            border-radius: 15px; /* Smaller radius */
+            padding: 11px; /* Smaller padding */
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05), 0 0 8px 4px #ffa500; /* Subtler shadow */
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(5, 110px); /* Уменьшенные размеры ячеек */
-            grid-template-rows: repeat(5, 110px);
-            gap: 19px; /* Уменьшенный зазор между ячейками */
+            grid-template-columns: repeat(5, 48px); /* Smaller cells */
+            grid-template-rows: repeat(5, 48px);
+            gap: 7px; /* Smaller gaps */
         }
 
         .square {
-            background-color: #238fa9; /* Аквамариновый цвет ячеек */
-            border-radius: 10px; /* Уменьшенные закругленные углы для квадратов */
-            transition: background-color 0.5s ease; /* Плавный переход цвета */
+            background-color: #238fa9;
+            border-radius: 7px; /* Smaller border radius */
+            transition: background-color 0.5s ease;
         }
 
         button {
-            margin-top: 25px;
-            padding: 25px 45px; /* Увеличенные отступы */
+            margin-top: 10px;
+            padding: 13px 21px; /* Reduced padding */
             border: none;
-            border-radius: 15px;
-            background-color: #000000; 
+            border-radius: 9px; /* Smaller radius */
+            background-color: #000000;
             color: white;
-            font-size: 32px; /* Увеличенный размер шрифта */
+            font-size: 17px; /* Reduced font size */
             cursor: pointer;
-            transition: all 0.3s ease; /* Плавный переход для всех свойств */
-            box-shadow: 0 5px 9px rgba(0, 0, 0, 0.2); /* Тень для создания эффекта глубины */
-            font-family: 'Intro', sans-serif; /* Применение локального шрифта */
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 3.5px rgba(0, 0, 0, 0.15); /* Subtler shadow */
+            font-family: 'Intro', sans-serif;
             text-align: center;
-            line-height: 1.2; /* Межстрочный интервал для двух строк текста */
+            line-height: 1.1; /* Closer line height */
         }
 
         button:hover, button:focus {
-            background-color: #0056b3; /* Темно-синий фон при наведении */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Увеличенная тень при наведении */
-            transform: translateY(-2px); /* Небольшое поднятие кнопки */
+            background-color: #0056b3;
+            box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.25); /* Subtle change on hover */
+            transform: translateY(-1px);
         }
 
         button:active {
-            background-color: #004885; /* Еще более темный синий при нажатии */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Уменьшенная тень при нажатии */
-            transform: translateY(1px); /* Возвращение кнопки в исходное положение */
+            background-color: #004885;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Less shadow on active */
+            transform: translateY(0.5px);
         }
 
-
         #trap-count-label {
-            margin-top: 50px; /* Увеличенное расстояние до счетчика */
-            font-size: 70px;
+            margin-top: 20px;
+            font-size: 31px; /* Smaller font size */
             color: white;
-            font-family: 'Intro', sans-serif; /* Применение локального шрифта */
+            font-family: 'Intro', sans-serif;
             font-weight: bold;
         }
 
@@ -94,39 +102,39 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 10px 0;
+            margin: 10px 0; /* Smaller margin */
         }
 
         .count-display {
-            width: 80px;
+            width: 38px; /* Smaller width */
             text-align: center;
-            font-size: 80px;
-            font-family: 'Intro', sans-serif; /* Применение локального шрифта */
+            font-size: 38px; /* Smaller font size */
+            font-family: 'Intro', sans-serif;
             color: white;
-            margin: 0 30px;
+            margin: 0 15px; /* Smaller margins */
         }
 
         .icon {
             cursor: pointer;
-            width: 114px;
-            height: 114px;
+            width: 53px; /* Smaller icons */
+            height: 53px;
         }
+
         #loading-text {
             cursor: default;
             text-align: center;
-            margin-bottom: 20px;
-            font-family: 'Intro', sans-serif; /* Применение локального шрифта */
+            margin-bottom: 11px; /* Smaller bottom margin */
+            font-family: 'Intro', sans-serif;
         }
 
         #loading-text span {
             display: inline-block;
-            animation: bounce 0.8s ease-in-out infinite alternate;
-            font-size: 120px;
+            animation: bounce 0.3s ease infinite alternate;
+            font-size: 53px; /* Smaller font size */
             color: rgb(209, 178, 5);
-            text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
-                        0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
-                        0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
-            transform-origin: bottom;
+            text-shadow: 0 0.25px 0 #ccc, 0 0.5px 0 #ccc, 0 0.75px 0 #ccc, 0 1px 0 #ccc,
+                        0 1.25px 0 #ccc, 0 1.5px 0 transparent, 0 1.75px 0 transparent, 0 2px 0 transparent,
+                        0 2.25px 0 transparent, 0 2.5px 2.5px rgba(0, 0, 0, 0.2);
         }
 
         #loading-text span:nth-child(1) { animation-delay: 0s; }
@@ -140,21 +148,30 @@
         @keyframes bounce {
             0% {
                 transform: translateY(0px);
-                text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
-                             0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
-                             0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+                text-shadow: 0 0.25px 0 #ccc, 0 0.5px 0 #ccc, 0 0.75px 0 #ccc, 0 1px 0 #ccc,
+                             0 1.25px 0 #ccc, 0 1.5px 0 transparent, 0 1.75px 0 transparent, 0 2px 0 transparent,
+                             0 2.25px 0 transparent, 0 2.5px 2.5px rgba(0, 0, 0, 0.2);
             }
             100% {
-                transform: translateY(-20px);
-                text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
-                             0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
-                             0 9px 0 transparent, 0 50px 25px rgba(0, 0, 0, 0.2);
+                transform: translateY(-5px);
+                text-shadow: 0 0.25px 0 #ccc, 0 0.5px 0 #ccc, 0 0.75px 0 #ccc, 0 1px 0 #ccc,
+                             0 1.25px 0 #ccc, 0 1.5px 0 transparent, 0 1.75px 0 transparent, 0 2px 0 transparent,
+                             0 2.25px 0 transparent, 0 12.5px 6.25px rgba(0, 0, 0, 0.1);
             }
         }
-
+        canvas#particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
+    <!-- <canvas id="particleCanvas"></canvas> -->
     <div class="main-container">
          <h1 id="loading-text">
         <span>M</span><span>I</span><span>N</span><span>E</span><span>S</span>
@@ -166,13 +183,13 @@
         </div>
         <div id="trap-count-label">NUMBER OF TRAPS</div>
         <div id="counter-container">
-            <img class="control-button icon" src="minus.png" onclick="decrement()" alt="Minus">
+            <img class="control-button icon" src="src/minus.png" onclick="decrement()" alt="Minus">
             <span id="count" class="count-display">3</span>
-            <img class="control-button icon" src="plus.png" onclick="increment()" alt="Plus">
+            <img class="control-button icon" src="src/plus.png" onclick="increment()" alt="Plus">
         </div>
-        <button onclick="getSignal()">GET<br>SIGNAL</button>
+        <button id="start" onclick="getSignal()">GET<br>SIGNAL</button>
     </div>
-    <audio id="sound-effect" src="1.mp3"></audio> <!-- Звуковой эффект для воспроизведения -->
+    <audio id="sound-effect" src="src/1.mp3"></audio> <!-- Звуковой эффект для воспроизведения -->
    <script>
     let count = 3; // Начальное количество ловушек
     const countElement = document.getElementById('count');
@@ -224,11 +241,72 @@
         }
     }
 
+    // Анимация белых точек
+    // const canvas = document.getElementById('particleCanvas')
+    // const ctx = canvas.getContext('2d')
+    // canvas.width = window.innerWidth
+    // canvas.height = window.innerHeight
+    // let particlesArray = []
+
+    // class Particle {
+    //     constructor() {
+    //         this.x = Math.random() * canvas.width
+    //         this.y = Math.random() * canvas.height
+    //         this.size = Math.random() * 5 + 1
+    //         this.speedX = Math.random() * 3 - 1.5
+    //         this.speedY = Math.random() * 3 - 1.5
+    //     }
+    //     update() {
+    //         this.x += this.speedX
+    //         this.y += this.speedY
+    //         if (this.size > 0.2) this.size -= 0.1
+    //     }
+    //     draw() {
+    //         ctx.fillStyle = 'rgba(255,255,255,0.8)'
+    //         ctx.beginPath()
+    //         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+    //         ctx.fill()
+    //     }
+    // }
+
+    // function initParticles() {
+    //     for (let i = 0; i < 80; i++) {
+    //         particlesArray.push(new Particle())
+    //     }
+    // }
+
+    // function animateParticles() {
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    //     for (let i = 0; i < particlesArray.length; i++) {
+    //         particlesArray[i].update()
+    //         particlesArray[i].draw()
+    //         if (particlesArray[i].size <= 0.3) {
+    //             particlesArray.splice(i, 1)
+    //             i--
+    //             particlesArray.push(new Particle())
+    //         }
+    //     }
+    //     requestAnimationFrame(animateParticles)
+    // }
+
+    // window.addEventListener('resize', () => {
+    //     canvas.width = window.innerWidth
+    //     canvas.height = window.innerHeight
+    // })
+
+    //initParticles()
+    //animateParticles()
 
 
 
     async function getSignal() {
-        const squares = document.querySelectorAll('.square');
+        const squares = document.querySelectorAll('.square'); // Предполагается, что у вас есть элементы с классом square
+        const button = document.getElementById('start'); // Селектор кнопки
+
+        button.textContent = "We do magic..";
+        button.style.backgroundColor = '#555';
+        button.disabled = true; // Отключаем кнопку
+
         squares.forEach(square => {
             square.style.backgroundColor = '#238fa9';
             square.innerHTML = '';
@@ -241,25 +319,37 @@
             indices.add(Math.floor(Math.random() * squares.length));
         }
 
-        let delay = 0;
+        let delay = 50;
 
         for (const index of indices) {
             // Используем обертку для асинхронного вызова
             setTimeout(async () => {
-                const audio = new Audio('1.mp3'); // Создаем новый экземпляр аудио для каждого воспроизведения
-                await audio.play(); // Воспроизводим звук
+                const audio = new Audio('src/1.mp3'); // Создаем новый экземпляр аудио для каждого воспроизведения
 
                 const square = squares[index];
                 square.style.backgroundColor = '#0a101e';
-                square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'star.svg\') center/contain no-repeat;"></div>';
+                square.innerHTML = '<div style="width: 100%; height: 100%; background: url(\'src/star.svg\') center/contain no-repeat;"></div>';
             }, delay);
             delay += 1000; // Задержка 1 секунда
         }
-    }
 
+        // Возвращаем кнопку к исходному состоянию после завершения всех задержек
+        setTimeout(() => {
+            button.innerHTML = "GET<br>SIGNAL"; // Возвращаем исходный текст с HTML
+            button.style.backgroundColor = ''; // Возвращаем исходный цвет
+            button.disabled = false; // Включаем кнопку снова
+        }, delay);
+    }
+    
     window.onload = function() {
         createSquares();
     }
 </script>
+<!-- <script>
+    // Запретить правый клик
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault(); // Отменяет стандартное действие правого клика
+    });
+</script> -->
 </body>
 </html>
