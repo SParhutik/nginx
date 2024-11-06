@@ -5,7 +5,7 @@ function getRan(min, max) {
 }
 
 async function checkSignal() {
-    let randomNumber1 = getRan(1.1, 1.5).toFixed(2);
+    let randomNumber1 = getRan(1.1, 4.2).toFixed(2);
     const url = 'https://crash-gateway-cr.100hp.app/state?id_n=1play_luckyjet';
     const response = await fetch(url, {
         method: 'GET',
