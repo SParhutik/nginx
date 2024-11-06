@@ -6,10 +6,16 @@ function getRan(min, max) {
 
 async function checkSignal() {
     let randomNumber1 = getRan(1.1, 1.5).toFixed(2);
-    const url = 'https://lucky-jet-history.gamedev-atech.cc/public/history/api/history/replay';
-    const response = await fetch(url);
+    const url = 'https://crash-gateway-cr.100hp.app/state?id_n=1play_luckyjet';
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer demo', // Добавляем заголовок авторизации
+            'Content-Type': 'application/json'
+        }
+    });
     const data = await response.json();
-    const state = data.state;
+    const state = data.current_state;
     const coefficientsDiv = document.getElementById('coefficients');
     const cupImg = document.getElementById('cup');
     const supImg = document.getElementById('sup');
@@ -39,7 +45,7 @@ async function checkSignal() {
         container.appendChild(img);
 
         const text = document.createElement('div');
-        text.innerText = 'WAITING FOR\nNEW GAME ROUND';
+        text.innerText = 'WAITING FOR THE NEXT\nGAME ROUND';
         text.id = 'waitingText';
         container.appendChild(text);
         
@@ -92,8 +98,16 @@ async function checkSignal() {
     }   
 }
 
+
 function fetchDataAndUpdate() {
-    fetch('https://lucky-jet-history.gamedev-atech.cc/public/history/api/history/replay')
+    const url = 'https://crash-gateway-cr.100hp.app/state?id_n=1play_luckyjet';
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer demo', // Добавляем заголовок авторизации
+            'Content-Type': 'application/json'
+        }
+    })
         .then(response => response.json())
         .then(data => {
             const kef = parseFloat(data.current_coefficients);
@@ -104,20 +118,16 @@ function fetchDataAndUpdate() {
 
 
 
-
 function updateCoefficients(coefficients) {
-
     const coefficientsDiv = document.getElementById('coefficients');
-    
 
-    if (coefficients !== 1) {
+    // Проверяем, что coefficients не равен 1, не равен null и является числом
+    if (coefficients !== 1 && coefficients !== null && !isNaN(coefficients)) {
         coefficientsDiv.innerText = `x${coefficients}`; 
         coefficientsDiv.classList.remove('smallt');
         coefficientsDiv.classList.add('kif');
-        
-        
-        
-    } 
+
+    }
 }
 
 
