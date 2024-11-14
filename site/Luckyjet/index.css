@@ -295,7 +295,7 @@ img {
     width: 65px;
     margin-top: 205px;
     margin-right: 130px;
-    animation: fly 4s forwards;
+    animation: fly 1.5s forwards;
 }
 
 
@@ -308,7 +308,7 @@ img {
     margin-top: 150px;
     margin-right: 50px;
     display: block;
-    animation: fly 4s forwards;
+    animation: fly 1.5s forwards;
 }
 
 .obloko {
