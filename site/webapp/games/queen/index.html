@@ -7,20 +7,6 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Rocket Queen</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        @media (max-width: 768px) {
-            iframe {
-                height: 100vh;
-            }
-        }
-
-        /* Стиль для больших экранов (768px и больше) */
-        @media (min-width: 768px) {
-            iframe {
-                height: 65vh;
-            }
-        }
-    </style>
 </head>
 <body class="page">
     <div class="cv">
@@ -37,7 +23,7 @@
          <button class="button2" target="_blank2" onclick="location.href='/webapp'">Back to menu</button>
         <div class="loader2"></div>
         <div class="visible">
-            <iframe
+            <iframe id="responsive-iframe"
                 src="https://100hp.app/queen/onewin/"
                 style="overflow: hidden; border: none; width: 100%;">
             </iframe>
@@ -56,6 +42,35 @@
         document.addEventListener('contextmenu', function(event) {
             event.preventDefault(); // Отменяет стандартное действие правого клика
         });
+    </script>
+    <script>
+        let isFixed = false; // Флаг для блокировки изменения высоты
+
+        function adjustIframeHeight() {
+            const iframe = document.getElementById('responsive-iframe');
+            const screenHeight = window.innerHeight;
+
+            // Если высота экрана меньше 800, фиксируем высоту и блокируем изменения
+            if (screenHeight < 800 && !isFixed) {
+                iframe.style.height = `${screenHeight}px`; // Устанавливаем высоту равной экрану
+                isFixed = true; // Блокируем дальнейшие изменения
+                window.removeEventListener('resize', adjustIframeHeight); // Отключаем обработчик
+            } else if (screenHeight >= 800 && !isFixed) {
+                // Разблокируем при больших размерах экрана и применяем адаптивную высоту
+                if (screenHeight < 1200) {
+                    iframe.style.height = `${screenHeight * 0.8}px`; // Пропорциональная высота
+                } else {
+                    iframe.style.height = `${screenHeight - 500}px`; // Высота с корректировкой
+                }
+                // Высота будет адаптивной до изменения экрана обратно на < 800px
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        adjustIframeHeight();
+
+        // Слушатель изменения размера окна
+        window.addEventListener('resize', adjustIframeHeight);
     </script>
 </body>
 </html>
