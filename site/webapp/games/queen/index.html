@@ -51,8 +51,8 @@
             const screenHeight = window.innerHeight;
 
             // Если высота экрана меньше 800, фиксируем высоту и блокируем изменения
-            if (screenHeight < 800 && !isFixed) {
-                iframe.style.height = `100vh`; // Устанавливаем высоту равной экрану
+            if (screenHeight < 700 && !isFixed) {
+                iframe.style.height = `${screenHeight}vh`; // Устанавливаем высоту равной экрану
                 isFixed = true; // Блокируем дальнейшие изменения
                 window.removeEventListener('resize', adjustIframeHeight); // Отключаем обработчик
             } else if (screenHeight >= 800 && !isFixed) {
