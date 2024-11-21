@@ -53,11 +53,11 @@
             alert(screenHeight)
 
             // Если высота экрана меньше 800, фиксируем высоту и блокируем изменения
-            if (screenHeight < 700 && !isFixed) {
+            if (screenHeight < 820 && !isFixed) {
                 iframe.style.height = `${screenHeight + 300}px`; // Устанавливаем высоту равной экрану
                 isFixed = true; // Блокируем дальнейшие изменения
                 window.removeEventListener('resize', adjustIframeHeight); // Отключаем обработчик
-            } else if (screenHeight >= 800 && !isFixed) {
+            } else if (screenHeight >= 820 && !isFixed) {
                 // Разблокируем при больших размерах экрана и применяем адаптивную высоту
                 if (screenHeight < 1200) {
                     iframe.style.height = `${screenHeight * 0.8}px`; // Пропорциональная высота
