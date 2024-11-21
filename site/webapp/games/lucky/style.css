@@ -125,7 +125,7 @@ iframe {
 
 .page::before {
     content: "";
-    background-image: url('images/bg.jpg');
+    background-image: url('files/images/bg.jpg');
     background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center top;
