@@ -50,6 +50,8 @@
             const iframe = document.getElementById('responsive-iframe');
             const screenHeight = window.innerHeight;
 
+            alert(screenHeight)
+
             // Если высота экрана меньше 800, фиксируем высоту и блокируем изменения
             if (screenHeight < 700 && !isFixed) {
                 iframe.style.height = `${screenHeight + 300}px`; // Устанавливаем высоту равной экрану
