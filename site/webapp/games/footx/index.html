@@ -7,7 +7,7 @@
     <style>
         @font-face {
             font-family: 'Intro';
-            src: url('./files/intro.otf') format('opentype');
+            src: url('files/intro.otf') format('opentype');
         }
         * {
             margin: 0;
@@ -344,22 +344,22 @@
         </div>
 
 
-        <img src="./files/img/logo.png" alt="Logo" class="logo">
+        <img src="files/img/logo.png" alt="Logo" class="logo">
         <div class="coefficient hidden">x0.00</div>
 
         <div class="placeholder">
             <div class="question-mark">?</div>
-            <img src="./files/img/1.png" alt="Footballer" class="footballer hidden" id="footballer">
+            <img src="files/img/1.png" alt="Footballer" class="footballer hidden" id="footballer">
         </div>
 
         <button class="button" onclick="revealFootballer()">Start Hack</button>
     </div>
         <div class="tab">
-        <button class="tablinks games-icon" data-tab="Games" onclick="window.location.href='/'">
-            <img src="./files/img/back.png" alt="Игры">
+        <button class="tablinks games-icon" data-tab="Games" onclick="window.location.href='/webapp'">
+            <img src="files/img/back.png" alt="Игры">
         </button>
     </div>
-    <script src="./files/telegram-web-app.js"></script>
+    <script src="files/telegram-web-app.js"></script>
 <script>
     function triggerHapticFeedback() {
         // Проверяем, если Telegram WebApp API доступен, и вызываем хаптическую обратную связь
@@ -368,7 +368,7 @@
         }
     }
 
-    const footballers = ['./files/img/1.png', './files/img/2.png', './files/img/3.png', './files/img/4.png', './files/img/5.png'];
+    const footballers = ['files/img/1.png', 'files/img/2.png', 'files/img/3.png', 'files/img/4.png', 'files/img/5.png'];
 
     function revealFootballer() {
         // Убираем знак вопроса

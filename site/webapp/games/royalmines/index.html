@@ -9,7 +9,7 @@
     <style>
         @font-face {
             font-family: 'Intro';
-            src: url('./files/intro.otf') format('opentype'); /* Укажите правильный путь к файлу */
+            src: url('files/intro.otf') format('opentype'); /* Укажите правильный путь к файлу */
         }
         body, html {
             margin: 0;
@@ -22,7 +22,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-image: url('./files/1.gif'); /* Добавляем фон GIF */
+            background-image: url('files/1.gif'); /* Добавляем фон GIF */
             background-size: cover; /* Растягиваем фон */
             background-position: center; /* Центрируем фон */
             background-repeat: no-repeat; /* Запрещаем повторение фона */
@@ -130,7 +130,7 @@
             transform: translateY(2px);
         }
         .square.active {
-            background-image: url('./files/step.svg');
+            background-image: url('files/step.svg');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
@@ -251,23 +251,23 @@
     <div class="game-board" id="gameBoard"></div>
     <div class="play-buttons-container">
         <button class="reset-button">
-            <img src="./files/pere.png" alt="Pere icon" style="width: 100%; height: 100%;">
+            <img src="files/pere.png" alt="Pere icon" style="width: 100%; height: 100%;">
         </button>
         <button class="play-button">
-            <img src="./files/play.png" alt="Play icon" style="width: 80%; height: 80%;">
+            <img src="files/play.png" alt="Play icon" style="width: 80%; height: 80%;">
         </button>
     </div>
-    <button class="return-button" onclick="location.href='/'">Back</button>
+    <button class="return-button" onclick="location.href='/webapp'">Back</button>
  <div id="notification" class="notification">
     <div class="notification-content">
         <p class="notification-text">Game End!</p>
         <button class="close-b" onclick="closeNotification()">Close</button>
     </div>
 </div>
-    <audio id="click-sound" src="./files/click.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
-    <audio id="reset-sound" src="./files/reset.mp3"></audio>
-    <audio id="not-sound" src="./files/notify.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
-    <audio id="cl-sound" src="./files/close.mp3"></audio>
+    <audio id="click-sound" src="files/click.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
+    <audio id="reset-sound" src="files/reset.mp3"></audio>
+    <audio id="not-sound" src="files/notify.mp3"></audio><!-- Звуковой эффект для воспроизведения -->
+    <audio id="cl-sound" src="files/close.mp3"></audio>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const gameBoard = document.getElementById('gameBoard');
