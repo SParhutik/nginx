@@ -67,7 +67,7 @@ function fetchDataAndUpdate() {
 function updateCoefficients(coefficients) {
     const coefficientsDiv = document.getElementById('coefficients');
     if (!coefficientsDiv) {
-        console.error('Element with ID coefficients not found.');
+       // console.error('Element with ID coefficients not found.');
         return;
     }
 
